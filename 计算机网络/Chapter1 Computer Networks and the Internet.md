@@ -24,7 +24,7 @@
 
 8、套接字接口 socket interface:一套发送程序必须遵循的规则集合，规定了交付数据的方式
 
-# 二、网络边缘
+# 二、The Network Edge
 
 1、接入网
 
@@ -40,7 +40,7 @@
 + 导引型媒体：双绞铜线、同轴电缆、光纤
 + 非导引型媒体：无线局域网、数字卫星频道
 
-# 三、网络核心
+# 三、The Network Core
 
 ## 分组交换 packet switching
 
@@ -60,7 +60,7 @@
 
 3、转发表和路由选择协议
 
-​	路由器通过**路由选择协议**（routing protocol）自动得设置**转发表**（forwarding table），转发表映射目的地址成为输出链路
+​	路由器通过**路由选择协议**（routing protocol）自动设置**转发表**（forwarding table），转发表映射目的地址成为输出链路
 
 ## 电路交换 circuit switching
 
@@ -87,7 +87,7 @@
 + 因特网交换点 IXP：一个多个ISP在此处一起对等
 + *我国国家级ISP：Tian2012
 
-# 四、分组交换网
+# 四、分组交换网 Packet-Switched Networks
 
 ## 时延
 
@@ -96,7 +96,8 @@ $$
 d_{nodel} = d_{proc} + d_{queue} + d_{trans} + d_{prop}
 $$
 
-<center>**总时延 = 处理时延 + 排队时延 + 传输时延 + 传播时延**
+<center>总时延 = 处理时延 + 排队时延 + 传输时延 + 传播时延
+
 
 + 流量强度：用于估计排队时延的范围
   $$
@@ -119,7 +120,7 @@ $$
 min\{R_c,R_s\}
 $$
 
-# 五、协议层次及其服务模型
+# 五、协议层次及其服务模型 Protocol Layers and Their Service Models
 
 ## 协议分层
 
@@ -134,7 +135,7 @@ $$
 
 3、封装 encapsulation
 
-# *六、面对攻击的网络
+# *六、Networks Under Attack
 
 1、常见有害程序
 
@@ -153,7 +154,7 @@ $$
 + 分组嗅探器（packet sniffer）：记录每个流经的分组副本的**被动**接收机（不向信道注入信息）。难以发觉，可应用密码学规避
 + IP哄骗（IP Spoofing）：将具有虚假源地址的分组注入因特网（主动），可采用端点鉴别
 
-# *七、因特网的历史
+# *七、History of Computer Networking
 
 + 分组交换的发展（1961-1972）
   + NCP：ARPAnet端系统间第一台主机-主机协议

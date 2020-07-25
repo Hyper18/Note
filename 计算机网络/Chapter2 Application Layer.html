@@ -1,0 +1,246 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>Chapter2 Application Layer</title></head>
+<body><h1>应用层协议原理</h1>
+<h2>网络应用程序体系结构</h2>
+<p>1、<strong>客户 - 服务器体系架构</strong>（client-server architecture）</p>
+<ul>
+<li>服务器主机总是打开，接收客户主机请求</li>
+<li>客户之间不相互通信</li>
+
+</ul>
+<p>2、<strong>P2P体系结构</strong></p>
+<ul>
+<li><p>对数据中心的专用服务器仅有最小依赖</p>
+</li>
+<li><p>标识：发起通信为客户，等待联系为服务器</p>
+</li>
+<li><p>间断连接的主机间使用直接通信</p>
+<ul>
+<li>这样的一组主机称对等方</li>
+
+</ul>
+</li>
+<li><p><strong>自扩展性</strong> self-scalability</p>
+<ul>
+<li>向对等方发送文件</li>
+<li>请求产生工作负载，但也为系统增加服务能力</li>
+
+</ul>
+</li>
+
+</ul>
+<h2>进程通信</h2>
+<p>1、进程 process</p>
+<ul>
+<li><p>def：运行在端系统的一个程序</p>
+</li>
+<li><p>通信进程对：每对两个进程互相发送报文</p>
+</li>
+<li><p><strong>进程寻址</strong>的要求</p>
+<ul>
+<li>主机地址</li>
+<li>目的主机需指定接收进程的标识符</li>
+
+</ul>
+</li>
+
+</ul>
+<p>2、套接字 socket：向网络发送 / 接收报文的软件接口</p>
+<p>3、应用程序编程接口 <em>API</em></p>
+<ul>
+<li><p>建立网络应用程序的可编程接口</p>
+</li>
+<li><p>运输层的控制</p>
+<ul>
+<li>选择运输层协议</li>
+<li>部分运输层参数</li>
+
+</ul>
+</li>
+
+</ul>
+<h2>可供应用程序使用的运输服务</h2>
+<p>1、<strong>可靠数据传输</strong>：正确、完全地交付数据</p>
+<p>2、吞吐量</p>
+<ul>
+<li>带宽敏感 / 弹性应用</li>
+
+</ul>
+<p>3、<strong>定时保证</strong></p>
+<ul>
+<li>交互式实时应用</li>
+
+</ul>
+<p>4、安全性</p>
+<h2>因特网提供的运输服务</h2>
+<p>1、TCP服务</p>
+<ul>
+<li><p>面向连接：流动前互换运输层控制信息，结束后拆除连接</p>
+</li>
+<li><p>可靠数据传送：无差错、按适当顺序交付</p>
+</li>
+<li><p><strong>拥塞控制</strong></p>
+</li>
+<li><p>无加密机制</p>
+<ul>
+<li>改进：*安全套接字层（Secure Socket Layer，SSL）</li>
+
+</ul>
+</li>
+
+</ul>
+<p>2、UDP服务</p>
+<ul>
+<li>轻量级，仅提供最小服务</li>
+<li>不可靠数据传送：不保证到达、可乱序</li>
+<li>可选定数据的传输速率</li>
+<li>无加密机制</li>
+
+</ul>
+<h2>应用层协议</h2>
+<p>1、RFC（Request For Comments）文档：一系列以编号排定的文件</p>
+<ul>
+<li>位于公共域中</li>
+<li>收录几乎所有互联网标准</li>
+
+</ul>
+<p>2、超文本传输协议 HTTP</p>
+<p>3、简单邮件传输协议 SMTP</p>
+<h1>HyperText Transfer Protocol</h1>
+<p>1、超文本传输协议 HTTP</p>
+<ul>
+<li>定义报文的结构和客户、服务器进行报文交换的方式</li>
+<li>实现：一个客户程序和一个服务器程序（P65）</li>
+<li>支撑运输协议：<em>TCP</em></li>
+<li>无状态协议 stateless protocol：不保存关于客户的任何信息</li>
+
+</ul>
+<p>2、连接方式</p>
+<ul>
+<li><p><strong>非持续连接</strong> non-persistent connection</p>
+<ul>
+<li><p>请求 / 响应经一单独TCP连接发送</p>
+</li>
+<li><p>为每个请求对象建立和维护一个全新连接</p>
+</li>
+<li><p><strong>三次握手</strong>：发送确认<em>RTT</em> - 返回确认<em>RTT</em> - 传输</p>
+<ul>
+<li>往返时间 Round-Trip Time，<em>RTT</em></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><p><strong>持续连接</strong>（默认）</p>
+<ul>
+<li>请求 / 响应经相同的TCP连接发送</li>
+<li>带流水线（默认）：对对象的请求可依次发出，不必等待未决请求</li>
+
+</ul>
+</li>
+
+</ul>
+<p>3、报文格式</p>
+<p><strong>请求报文（P68，CR回车，LF换行）</strong></p>
+<ul>
+<li><p>组成：</p>
+<ul>
+<li><p>第一行称<strong>请求行</strong> request line</p>
+<ul>
+<li>三个部分：方法字段 URL字段 HTTP字段</li>
+
+</ul>
+</li>
+<li><p>后继行称<strong>首部行</strong> header line</p>
+</li>
+<li><p>实体体 entity body：POST方法使用</p>
+</li>
+
+</ul>
+</li>
+<li><p>方法字段：GET POST HEAD PUT DELETE</p>
+<ul>
+<li><p>GET：请求对象、提交表单（HTML表单）</p>
+</li>
+<li><p>POST：提交表单</p>
+</li>
+<li><p>HEAD：响应请求，但不返回对象</p>
+<ul>
+<li>*试跟踪</li>
+
+</ul>
+</li>
+<li><p>PUT：常与Web发行工具共用，上传对象到指定Web服务器指定路径</p>
+</li>
+<li><p>DELETE：允许删除Web服务器上对象</p>
+</li>
+
+</ul>
+</li>
+
+</ul>
+<p><strong>响应报文（P69）</strong></p>
+<ul>
+<li><p>组成</p>
+<ul>
+<li><p>状态行 status line </p>
+<ul>
+<li>三个部分：协议版本字段 状态码 相应状态信息</li>
+
+</ul>
+</li>
+<li><p>首部行和实体体</p>
+</li>
+
+</ul>
+</li>
+<li><p>常见状态码：200 OK；301请求对象已经永久转移；400/404；505 不支持的HTTP协议版本</p>
+</li>
+
+</ul>
+<p>4、Cookie</p>
+<ul>
+<li><p>组成</p>
+<ul>
+<li>响应报文中的一个cookie首部行</li>
+<li>请求报文中的一个cookie首部行</li>
+<li>用户端系统保留的一个cookie文件</li>
+<li>位于Web站点的一个后端数据库</li>
+
+</ul>
+</li>
+<li><p><strong>识别码</strong> Set-cookie：用于标识一个用户</p>
+<ul>
+<li>*用户隐私侵害</li>
+
+</ul>
+</li>
+
+</ul>
+<p>5、Web缓存</p>
+<ul>
+<li><p>Web缓存器 Web Cache / 代理服务器 <em>proxy server</em></p>
+<ul>
+<li>配置后的浏览器请求被定向至代理服务器</li>
+<li>发送给用户服务器的是保存的一份<strong>副本</strong></li>
+<li>从整体上大大降低因特网的流量</li>
+
+</ul>
+</li>
+<li><p>内容分发网络 Content Distribution Network，CDN：使大量流量实现本地化</p>
+</li>
+<li><p><strong>条件Get方法</strong>：执行最新检查</p>
+<ul>
+<li>If-Modified-Since = Last-Modified -&gt; 304 Not Modified</li>
+
+</ul>
+</li>
+
+</ul>
+<h1>电子邮件</h1>
+</body>
+</html>

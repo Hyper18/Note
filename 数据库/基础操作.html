@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>基础操作</title></head>
+<body><p>基础操作（1~8章）</p>
+<p>1、数据库 database：保存有组织数据的容器</p>
+<p>2、表 table：特定类型数据的结构化清单</p>
+<p>3、行 row / record：表中的一个记录</p>
+<p>4、<strong>主键</strong> primary key：每一行中可以<strong>唯一</strong>标识自己的一列</p>
+<ul>
+<li>前提：任意两行不具有相同值、每行必须具有一个主键值</li>
+<li>习惯：主键值不更新 不重用，不在主键使用可能会更改的值</li>
+
+</ul>
+<p>5、关键字 key word：作为一个保留字</p>
+<p>&nbsp;</p>
+<p>键入</p>
+<p>1、书写习惯</p>
+<ul>
+<li>命令行用分号 ; 结尾多条语句也需用分号分割</li>
+<li>对于关键字：使用大小写均可，全用大写并分成多行，易于阅读、调试</li>
+<li>在选择多个列时，一定要在列名之间加上逗号吗，<strong>但最后一列不加</strong></li>
+
+</ul>
+<p>2、使用数据库： USE 数据库名</p>
+<p>&nbsp;</p>
+<p>显示：SHOW语句</p>
+<ul>
+<li><p>SHOW DATABASES：显示所有数据库列表</p>
+</li>
+<li><p>SHOW TABLES：显示某个库内所有表的列表</p>
+</li>
+<li><p>SHOW COLUMNS FROM：表名显示某个库内所有列的列表</p>
+<ul>
+<li>快速写法：DESCRIBE 表名</li>
+
+</ul>
+</li>
+<li><p>SHOW STATUS：显示广泛的服务器信息</p>
+</li>
+<li><p>SHOW CREATE DATABASE / TABLE：显示创建的特定数据库或表表示的Mysql语句</p>
+</li>
+<li><p>SHOW GRANTS：显示授权用户的安全权限</p>
+</li>
+<li><p>SHOW ERRORS / WARNINGS：显示服务器的错误或警告信息</p>
+</li>
+
+</ul>
+<p>&nbsp;</p>
+<p>选择：SELECT语句</p>
+<ul>
+<li><p>SELECT 列名 FROM 表名：检索，输出的是未排序数据</p>
+</li>
+<li><p>SELECT * FROM 表名：检索所有列</p>
+<ul>
+<li>给定*通配符，则返回表中所有列，而且可检索出未知列；但滥用会降低效能</li>
+
+</ul>
+</li>
+<li><p>SELECT DISTINCT 列名：只返回唯一（去重）的行</p>
+</li>
+<li><p>SELECT 列名 FROM 表名 LIMIT 行数：检索指定的行数</p>
+<ul>
+<li>SELECT 列名 FROM 表名 LIMIT 开始行 行数：检索指定从行号为第一个值的位置开始的行数</li>
+<li>替代语法：SELECT 列名 FROM 表名 LIMIT  行数 OFFSET 开始行</li>
+
+</ul>
+</li>
+<li><p>SELECT 表名.列名 FROM 表名：完全限定的列名</p>
+</li>
+
+</ul>
+<p>&nbsp;</p>
+<p>排序</p>
+<p>1、子句：一个关键字和所提供的数据组成</p>
+<p>2、ORDER BY语句</p>
+<ul>
+<li><p>SELECT 列名 FROM 表名 ORDER BY 子句名：以字母顺序排序数据的ORDER BY子句</p>
+</li>
+<li><p>SELECT 列名 FROM 表名 ORDER BY 子句名1 子句名2 ……</p>
+</li>
+<li><p>SELECT 列名 FROM 表名 ORDER BY 子句名 DESC：降序排列</p>
+</li>
+<li><p>SELECT 列名 FROM 表名 ORDER BY 子句名1 DESC 子句名2：子句1降序 2升序</p>
+<ul>
+<li>即：DESC只应用到<strong>直接</strong>位于其前面的列名</li>
+<li>ASC asending：默认的情形就是升序，略</li>
+
+</ul>
+</li>
+<li><p>SELECT 列名 FROM 表名 ORDER BY 子句名 LIMIT 行数：按升序显示表中数据指定列子句的指定行数</p>
+</li>
+
+</ul>
+<p>&nbsp;</p>
+<p>过滤：</p>
+<p>1、通配符 wildcard：用来匹配值的一部分特殊字符</p>
+<ul>
+<li>Mysql中使用通配符：LIKE操作符指示，LIKE是*谓词（predicate）</li>
+
+</ul>
+<p>2、搜索模式：由字面值、通配符或两者组合构成的搜索条件</p>
+<p>3、WHERE子句</p>
+<ul>
+<li><p>SELECT 列名 FROM 表名 WHERE 数据 =（&lt;= / &gt;= / &gt; / &lt;） 该指定值：只返回指定值的行</p>
+</li>
+<li><p>同时使用ORDER BY：需要让ORDER BY位于WHERE之后</p>
+</li>
+<li><p>不匹配检查：SELECT 列名 FROM 表名 WHERE 数据 &lt;&gt; 值（效果同!=）</p>
+</li>
+<li><p>范围值检查：SELECT 列名 FROM 表名 WHERE 数据 BETWEEN 值1 AND 值2</p>
+</li>
+<li><p>空值检查：SELECT 列名 FROM 表名 WHERE 数据 IS NULL</p>
+</li>
+<li><p>多限定条件：SELECT 列名 FROM 表名 WHERE 数据 = 值1 AND 数据 &lt; 值2 OR 数据 &gt; 值3</p>
+<ul>
+<li>优先处理AND操作符</li>
+
+</ul>
+</li>
+<li><p>范围选取：SELECT 列名 FROM 表名 WHERE 数据 IN （值1，值2）</p>
+<ul>
+<li>完成与OR相同的功能</li>
+<li>直观易管理</li>
+<li>运行更快</li>
+<li>可包含其他SELECT语句，动态创建WHERE子句</li>
+
+</ul>
+</li>
+<li><p>否定：SELECT 列名 FROM 表名 WHERE 数据 <strong>NOT</strong> IN （值1，值2） ORDER BY 子句名</p>
+<ul>
+<li>常用于IN的复杂句式中取反</li>
+
+</ul>
+</li>
+<li><p>通配符操作：SELECT 列名 FROM 表名 WHERE 数据 LIKE ‘_字符串%’</p>
+<ul>
+<li><p>%用于表示接受字符串后续的任意字符</p>
+<ul>
+<li>‘%字符串%’则表示任何位置的匹配</li>
+<li>‘字符串1%字符串2’则表示字符串1开头、字符串2结尾的匹配</li>
+<li>注意当存在空格时， ‘%字符串’不会匹配</li>
+<li>NULL任何情况均不会被匹配</li>
+
+</ul>
+</li>
+<li><p>_只匹配单个字符</p>
+</li>
+<li><p>通配符的弊端：耗时较长（尤其位于起始处） 使用容易出错</p>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</body>
+</html>

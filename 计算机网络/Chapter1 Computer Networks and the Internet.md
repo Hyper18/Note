@@ -84,8 +84,8 @@
 + 存在点 PoP：存在于所有层次，提供对接
 + 多宿 multi-home：可与两个或更多提供商连接
 + 对等 peer：层次同一级不进行结算，即无需相互付费
-+ 因特网交换点 IXP：一个多个ISP在此处一起对等
-+ *我国国家级ISP：Tian2012
++ 因特网交换点 IXP：一个或多个ISP在此处一起对等
++ *我国国家级ISP：Tian
 
 # 四、分组交换网 Packet-Switched Networks
 

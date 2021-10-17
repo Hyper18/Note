@@ -18,8 +18,16 @@ Z = zeros(size(X, 1), K);
 %                    projection_k = x' * U(:, k);
 %
 
-
-
+% using only the top K eigenvectors in U
+U_reduce = U(:, 1:K);
+% implementing PCA
+for i = 1: size(X, 1)
+    x = X(i, :)';
+    for k = 1: K
+        projection_k = x' * U_reduce;
+        Z(i, :) = projection_k;
+    end
+end
 
 % =============================================================
 

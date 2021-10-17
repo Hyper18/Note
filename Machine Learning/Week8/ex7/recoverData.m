@@ -21,7 +21,15 @@ X_rec = zeros(size(Z, 1), size(U, 1));
 %               Notice that U(j, 1:K) is a row vector.
 %               
 
-
+% implementing PCA
+for i = 1: size(Z, 1)
+    v = Z(i, :)';
+    for j = 1: size(U, 1)
+        recovered_j = v' * U(:, 1:K)';
+        % 2D -> 1D
+        X_rec(i, :) = recovered_j;
+    end
+end
 
 % =============================================================
 

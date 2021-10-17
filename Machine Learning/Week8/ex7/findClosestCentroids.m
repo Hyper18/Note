@@ -21,11 +21,13 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
-
-
+for i = 1: size(X,1) % query from 1 to 300
+    d = zeros(1, K); % distance: 1*3 matrix
+    for j = 1: K
+        d(1, j) = sqrt(sum(power(X(i, :) - centroids(j, :), 2))); % use Euclidean Distance, centroids: 3*2 matrix
+    end
+    [~, idx(i)] = min(d); % get the 2nd parameter from distance matrix only
+end
 
 % =============================================================
 

@@ -11,11 +11,10 @@ function centroids = computeCentroids(X, idx, K)
 %
 
 % Useful variables
-[m n] = size(X);
+[m, n] = size(X);
 
 % You need to return the following variables correctly.
-centroids = zeros(K, n);
-
+centroids = zeros(K, n); % 3*2 matrix
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Go over every centroid and compute mean of all points that
@@ -26,12 +25,12 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
-
-
-
-
-
+for i = 1 : K
+    % find all the points that is nearest to No.i centroid, then count their
+    % mean
+    points = X(idx==i, :);
+    centroids(i, :) = mean(points);
+end
 
 % =============================================================
 

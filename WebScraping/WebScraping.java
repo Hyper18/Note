@@ -25,7 +25,7 @@ public class WebScraping {
         System.out.println("-------------");
         System.out.println(getWebString2(url2));
         System.out.println("-------------");
-        System.out.println(getWebString(url3));
+        System.out.println(getWebString2(url3));
     }
 
     /**
@@ -43,7 +43,7 @@ public class WebScraping {
             InputStream inputStream = urlConnection.getInputStream();
 
             int i = 0;
-            String result = "";
+            StringBuilder sb = new StringBuilder();
             while (i < len) {
                 byte[] bytes;
                 if (len - i <= BYTE_SIZE) {
@@ -53,13 +53,13 @@ public class WebScraping {
                     bytes = new byte[BYTE_SIZE];
                     inputStream.read(bytes, STANDARD_OFFSET, BYTE_SIZE);
                 }
-                result += new String(bytes);
+                sb.append(new String(bytes));
                 i += BYTE_SIZE;
             }
-
             inputStream.close();
-            return result;
-        } catch (Exception ex) {
+
+            return sb.toString();
+        } catch (Exception e) {
             return ERROR_OUTPUT;
         }
     }
@@ -74,15 +74,17 @@ public class WebScraping {
         try {
             URL url = new URL(webUrl);
             InputStream inputStream = url.openStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String line;
             StringBuilder sb = new StringBuilder();
             while ((line = bufferedReader.readLine()) != null) {
-                sb.append(line + "\r\n");
+                sb.append(line);
+                sb.append("\r\n");
             }
+
             return sb.toString();
-        } catch (Exception ex) {
+        } catch (Exception e) {
             return ERROR_OUTPUT;
         }
     }
